@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>NaashonSecureIoT Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        #blockchain-data {
+            margin-top: 20px;
+        }
+        .block {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>NaashonSecureIoT Dashboard</h1>
+    <div id="blockchain-data">
+        <h2>Blockchain Data</h2>
+        <div id="blocks">
+            <!-- Blocks will be added here -->
+        </div>
+    </div>
+
+    <script>
+        function fetchBlockchainData() {
+            // Simulate fetching data from the blockchain
+            const blockchainData = [
+                { index: 0, timestamp: "2025-09-23 09:00:00", data: "Genesis Block", hash: "0000", previous_hash: "0" },
+                { index: 1, timestamp: "2025-09-23 09:01:00", data: "Device1: Temperature 25, Humidity 50", hash: "1111", previous_hash: "0000" },
+                { index: 2, timestamp: "2025-09-23 09:02:00", data: "Device2: Temperature 28, Humidity 55", hash: "2222", previous_hash: "1111" }
+            ];
+
+            const blocksContainer = document.getElementById("blocks");
+            blocksContainer.innerHTML = ""; // Clear existing blocks
+
+            blockchainData.forEach(block => {
+                const blockDiv = document.createElement("div");
+                blockDiv.classList.add("block");
+                blockDiv.innerHTML = `
+                    <h3>Block #${block.index}</h3>
+                    <p>Timestamp: ${block.timestamp}</p>
+                    <p>Data: ${block.data}</p>
+                    <p>Hash: ${block.hash}</p>
+                    <p>Previous Hash: ${block.previous_hash}</p>
+                `;
+                blocksContainer.appendChild(blockDiv);
+            });
+        }
+
+        // Fetch data initially and then every 5 seconds
+        fetchBlockchainData();
+        setInterval(fetchBlockchainData, 5000);
+    </script>
+</body>
+</html>
