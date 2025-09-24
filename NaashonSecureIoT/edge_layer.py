@@ -1,4 +1,6 @@
 import torch
+
+
 import torch.nn as nn
 
 class AnomalyDetector(nn.Module):
@@ -12,6 +14,7 @@ class AnomalyDetector(nn.Module):
         x = torch.relu(self.fc1(x))
         x = torch.relu(self.fc2(x))
         return torch.sigmoid(self.fc3(x))
+
 
 if __name__ == '__main__':
     # Example usage

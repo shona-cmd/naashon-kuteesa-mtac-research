@@ -12,6 +12,7 @@ class CloudLayer:
         print("Backing up data...")
         return f"Data backed up: {data}"
 
+
 if __name__ == '__main__':
     # Example usage
     cloud_layer = CloudLayer()

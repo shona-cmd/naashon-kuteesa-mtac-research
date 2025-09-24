@@ -1,5 +1,7 @@
-import hashlib
 import time
+
+
+import hashlib
 
 class Block:
     def __init__(self, index, timestamp, data, previous_hash):
@@ -10,8 +12,11 @@ class Block:
         self.hash = self.calculate_hash()
 
     def calculate_hash(self):
-        hash_string = str(self.index) + str(self.timestamp) + str(self.data) + str(self.previous_hash)
+        hash_string = str(self.index) + str(self.timestamp) + str(self.data)
+
+        hash_string += str(self.previous_hash)
         return hashlib.sha256(hash_string.encode()).hexdigest()
+
 
 class Blockchain:
     def __init__(self):
@@ -22,7 +27,9 @@ class Blockchain:
 
     def add_block(self, data):
         previous_block = self.chain[-1]
-        new_block = Block(len(self.chain), time.time(), data, previous_block.hash)
+        new_block = Block(
+            len(self.chain), time.time(), data, previous_block.hash
+        )
         self.chain.append(new_block)
 
     def is_chain_valid(self):
@@ -37,6 +44,7 @@ class Blockchain:
                 return False
 
         return True
+
 
 if __name__ == '__main__':
     # Example usage

@@ -12,6 +12,7 @@ class NetworkLayer:
         print(f"Applying zero-trust authentication for device {device_id}...")
         return True
 
+
 if __name__ == '__main__':
     # Example usage
     network_layer = NetworkLayer()

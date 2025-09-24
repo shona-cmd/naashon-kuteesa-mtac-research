@@ -1,4 +1,6 @@
 import time
+
+
 import random
 
 class IoTDevice:
@@ -9,12 +11,18 @@ class IoTDevice:
         # Simulate sensor data
         temperature = random.randint(20, 30)
         humidity = random.randint(40, 60)
-        return {"device_id": self.device_id, "temperature": temperature, "humidity": humidity}
+        return {
+            "device_id": self.device_id,
+            "temperature": temperature,
+
+            "humidity": humidity,
+        }
 
     def send_data(self, blockchain):
         data = self.generate_data()
         print(f"Device {self.device_id} sending data: {data}")
         blockchain.add_block(data)
+
 
 if __name__ == '__main__':
     # Example usage

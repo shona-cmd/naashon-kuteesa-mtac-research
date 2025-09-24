@@ -1,0 +1,33 @@
+version: "3.8"
+services:
+  broker:
+    image: eclipse-mosquitto:2.0
+    ports:
+      - "1883:1883"
+    volumes:
+      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf
+
+  gateway:
+    build: ./edge_gateway
+    depends_on:
+      - broker
+    environment:
+      - MQTT_BROKER=broker
+      - MQTT_PORT=1883
+    ports:
+      - "5000:5000"
+
+  device_sim:
+    build: ./device_sim
+    depends_on:
+      - broker
+    environment:
+      - MQTT_BROKER=broker
+    command: ["python", "/app/device_sim.py", "--device-id", "device-1", "--interval", "2.0"]
+
+  # optional: blockchain dev node (ganache)
+  blockchain:
+    image: trufflesuite/ganache-cli:latest
+    command: ["-h", "0.0.0.0"]
+    ports:
+      - "8545:8545"
